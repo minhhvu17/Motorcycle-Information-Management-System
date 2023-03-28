@@ -242,6 +242,22 @@ class Main:
         self.clearFrame(contentFrame)
         tk.Label(contentFrame, text="New order",font=('Helvetica', 25, 'bold'), bg='#fff').place(x=60, y=60)
         
+        customerInformationFrame = tk.Frame(contentFrame, height=180, width=890, bg='#cccccc')
+        customerInformationFrame.place(x=60, y=120)
+        tk.Label(customerInformationFrame, text="Customer Information:",font=('Helvetica', 14, 'bold'), bg='#cccccc').place(x=10, y=10)
+        
+        tk.Label(customerInformationFrame, text="Name:",font=('Helvetica', 14, 'bold'), bg='#cccccc').place(x=40, y=60)
+        customerNameInput = ttk.Entry(customerInformationFrame, width=22, font=('Helvetica', 14))
+        customerNameInput.place(x=150,y=60)
+        
+        tk.Label(customerInformationFrame, text="Phone:",font=('Helvetica', 14, 'bold'), bg='#cccccc').place(x=40, y=120)
+        phoneInput = ttk.Entry(customerInformationFrame, width=22, font=('Helvetica', 14))
+        phoneInput.place(x=150,y=120)
+        
+        modelInformationFrame = tk.Frame(contentFrame, height=290, width=890, bg='#cccccc')
+        modelInformationFrame.place(x=60, y=330)
+        tk.Label(modelInformationFrame, text="Product bought:",font=('Helvetica', 14, 'bold'), bg='#cccccc').place(x=10, y=10)
+        
     def displayManageOrders(self, contentFrame):
         self.clearFrame(contentFrame)
         tk.Label(contentFrame, text="Orders history",font=('Helvetica', 25, 'bold'), bg='#fff').place(x=60, y=60)
