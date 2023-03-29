@@ -127,11 +127,21 @@ class Main:
         self.revenue = tk.Label(contentFrameTwo, image=self.revenueResizeImg, bg='#ffffff')
         self.revenue.place(x=0, y=0)
         
-        contentFrameThree = tk.Frame(contentFrame, width=220, height=200, bg='#cccccc')
+        contentFrameThree = tk.Frame(contentFrame, width=220, height=220, bg='#cccccc')
         contentFrameThree.place(x=180, y=390)
+        self.brandsImg = Image.open(f"{url}image\\Brands.png")
+        self.brandsResizeImg = self.brandsImg.resize((220, 220))
+        self.brandsResizeImg = ImageTk.PhotoImage(self.brandsResizeImg)
+        self.brands = tk.Label(contentFrameThree, image=self.brandsResizeImg, bg='#ffffff')
+        self.brands.place(x=0, y=0)
         
-        contentFrameFour = tk.Frame(contentFrame, width=220, height=200, bg='#cccccc')
+        contentFrameFour = tk.Frame(contentFrame, width=220, height=220, bg='#cccccc')
         contentFrameFour.place(x=580, y=390)
+        self.soldProductsImg = Image.open(f"{url}image\\Sold_products.png")
+        self.soldProductsResizeImg = self.soldProductsImg.resize((220, 220))
+        self.soldProductsResizeImg = ImageTk.PhotoImage(self.soldProductsResizeImg)
+        self.soldProducts = tk.Label(contentFrameFour, image=self.soldProductsResizeImg, bg='#ffffff')
+        self.soldProducts.place(x=0, y=0)
         
         
     # Brand content
@@ -155,25 +165,36 @@ class Main:
         tk.Label(contentFrame, text="Category",font=('Helvetica', 25, 'bold'), bg='#fff').place(x=60, y=60)
         
         # Manual Motorcycle Box
+        def directToManual(e):
+            pass
         self.manualImg = Image.open(f"{url}image\\manual.png")
         self.manualResizeImg = self.manualImg.resize((200, 200))
         self.manualResizeImg = ImageTk.PhotoImage(self.manualResizeImg)
-        self.manual = tk.Label(contentFrame, image=self.manualResizeImg, bg='#ffffff')
+        self.manual = tk.Label(contentFrame, image=self.manualResizeImg, bg='#ffffff', cursor='hand2')
         self.manual.place(x=180, y=140)
+        self.manual.bind('<Button-1>', directToManual)
+        
         
         # Scooter Box
+        def directToScooter(e):
+            pass
         self.scooterImg = Image.open(f"{url}image\\scooter.png")
         self.scooterImg = self.scooterImg.resize((200, 200))
         self.scooterImg = ImageTk.PhotoImage(self.scooterImg)
-        self.scooter = tk.Label(contentFrame, image=self.scooterImg, bg='#ffffff')
+        self.scooter = tk.Label(contentFrame, image=self.scooterImg, bg='#ffffff', cursor='hand2')
         self.scooter.place(x=580, y=140)
+        self.scooter.bind('<Button-1>', directToScooter)
         
         # Sport Box
+        def directToSport(e):
+            pass
         self.sportImg = Image.open(f"{url}image\\sport.png")
         self.sportImg = self.sportImg.resize((200, 200))
         self.sportImg = ImageTk.PhotoImage(self.sportImg)
-        self.sport = tk.Label(contentFrame, image=self.sportImg, bg='#ffffff')
+        self.sport = tk.Label(contentFrame, image=self.sportImg, bg='#ffffff', cursor='hand2')
         self.sport.place(x=380, y=390)
+        self.sport.bind('<Button-1>', directToSport)
+        
           
         
     def displayAddProduct(self, contentFrame):
