@@ -1,6 +1,9 @@
 import tkinter as tk
+from tkinter import messagebox
 from tkinter import ttk
 from PIL import Image, ImageTk
+
+url = "E:\\Second_year\\Advanced Programming with Python\\Final\\"
 
 class HoverButton(tk.Button):
     def __init__(self, master, **kw):
@@ -52,7 +55,7 @@ class Main:
         self.window.resizable(False, False)
         self.window.title("Motorcycle Store Information Management System")
         
-        userInformationFrame = tk.Frame(self.window, width=1280, height=60, bg="#cccccc")
+        userInformationFrame = tk.Frame(self.window, width=1280, height=60, bg="black")
         userInformationFrame.place(x=0, y=0)
         
         navigationFrame = tk.Frame(self.window, width=270, height=660, bg="#cc0000")
@@ -60,28 +63,36 @@ class Main:
         
         self.contentFrame = tk.Frame(self.window, width=1010, height=660, bg='#fff')
         self.contentFrame.place(x=270, y=60)
-            
-        dashboardBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Dashboard", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayDashboard(self.contentFrame))
-        dashboardBtn.place(x=0, y=40)
+        
+        
+        self.logoImg = Image.open(f"{url}image\\motorbike.png")
+        self.logoResizeImg = self.logoImg.resize((120, 120))
+        self.logoResizeImg = ImageTk.PhotoImage(self.logoResizeImg)
+        self.logo = tk.Label(navigationFrame, image=self.logoResizeImg, bg='#cc0000')
+        self.logo.place(x=60, y=30)
+        
+
+        dashboardBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Dashboard", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayDashboard(self.contentFrame), cursor = 'hand2')
+        dashboardBtn.place(x=0, y=200)
         
         # Button to activate the function
         brandBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Brand", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayBrand(self.contentFrame))
-        brandBtn.place(x=0, y=75)
+        brandBtn.place(x=0, y=235)
         
         categoryBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Category", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayCategory(self.contentFrame))
-        categoryBtn.place(x=0, y=110)
+        categoryBtn.place(x=0, y=270)
         
         addProductBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Add Product", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayAddProduct(self.contentFrame))
-        addProductBtn.place(x=0, y=145)
+        addProductBtn.place(x=0, y=305)
         
         manageProductsBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Manage Products", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayManageProducts(self.contentFrame))
-        manageProductsBtn.place(x=0, y=180)
+        manageProductsBtn.place(x=0, y=340)
         
         newOrderBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="New order", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayNewOrder(self.contentFrame))
-        newOrderBtn.place(x=0, y=215)
+        newOrderBtn.place(x=0, y=375)
         
         manageOrdersBtn = HoverButton(navigationFrame, width=26, fg="#fff", bg="#cc0000", text="Orders history", font=('Helvetica', 13, 'bold'), bd=None, activebackground='#b20000', activeforeground = 'white', relief='flat', command=lambda: self.displayManageOrders(self.contentFrame))
-        manageOrdersBtn.place(x=0, y=250)
+        manageOrdersBtn.place(x=0, y=410)
         
         self.displayDashboard(self.contentFrame)
     
@@ -98,11 +109,23 @@ class Main:
         self.clearFrame(contentFrame)    
         tk.Label(contentFrame, text="Dashboard",font=('Helvetica', 25, 'bold'), bg='#fff').place(x=60, y=60)
         
-        contentFrameOne = tk.Frame(contentFrame, width=220, height=200, bg='#cccccc')
+        contentFrameOne = tk.Frame(contentFrame, width=220, height=220, bg='#cccccc')
         contentFrameOne.place(x=180, y=140)
         
-        contentFrameTwo = tk.Frame(contentFrame, width=220, height=200, bg='#cccccc')
+        self.totalProductImg = Image.open(f"{url}image\\Total_products.png")
+        self.totalProductResizeImg = self.totalProductImg.resize((220, 220))
+        self.totalProductResizeImg = ImageTk.PhotoImage(self.totalProductResizeImg)
+        self.totalProduct = tk.Label(contentFrameOne, image=self.totalProductResizeImg, bg='#ffffff')
+        self.totalProduct.place(x=0, y=0)
+        
+        
+        contentFrameTwo = tk.Frame(contentFrame, width=220, height=220, bg='#cccccc')
         contentFrameTwo.place(x=580, y=140)
+        self.revenueImg = Image.open(f"{url}image\\Revenue.png")
+        self.revenueResizeImg = self.revenueImg.resize((220, 220))
+        self.revenueResizeImg = ImageTk.PhotoImage(self.revenueResizeImg)
+        self.revenue = tk.Label(contentFrameTwo, image=self.revenueResizeImg, bg='#ffffff')
+        self.revenue.place(x=0, y=0)
         
         contentFrameThree = tk.Frame(contentFrame, width=220, height=200, bg='#cccccc')
         contentFrameThree.place(x=180, y=390)
@@ -132,21 +155,21 @@ class Main:
         tk.Label(contentFrame, text="Category",font=('Helvetica', 25, 'bold'), bg='#fff').place(x=60, y=60)
         
         # Manual Motorcycle Box
-        self.manualImg = Image.open(r"E:/Second_year/Advanced Programming with Python/Final/image/manual.png")
+        self.manualImg = Image.open(f"{url}image\\manual.png")
         self.manualResizeImg = self.manualImg.resize((200, 200))
         self.manualResizeImg = ImageTk.PhotoImage(self.manualResizeImg)
         self.manual = tk.Label(contentFrame, image=self.manualResizeImg, bg='#ffffff')
         self.manual.place(x=180, y=140)
         
         # Scooter Box
-        self.scooterImg = Image.open("E:\\Second_year\\Advanced Programming with Python\\Final\\image\\scooter.png")
+        self.scooterImg = Image.open(f"{url}image\\scooter.png")
         self.scooterImg = self.scooterImg.resize((200, 200))
         self.scooterImg = ImageTk.PhotoImage(self.scooterImg)
         self.scooter = tk.Label(contentFrame, image=self.scooterImg, bg='#ffffff')
         self.scooter.place(x=580, y=140)
         
         # Sport Box
-        self.sportImg = Image.open("E:\\Second_year\\Advanced Programming with Python\\Final\\image\\sport.png")
+        self.sportImg = Image.open(f"{url}image\\sport.png")
         self.sportImg = self.sportImg.resize((200, 200))
         self.sportImg = ImageTk.PhotoImage(self.sportImg)
         self.sport = tk.Label(contentFrame, image=self.sportImg, bg='#ffffff')
@@ -225,13 +248,57 @@ class Main:
         sellingPriceInput = ttk.Entry(inputFrame, width=15, font=('Helvetica', 14))
         sellingPriceInput.place(x=230,y=330)
         
+        tk.Label(inputFrame, text="Quantity:",font=('Helvetica', 14, 'bold'), bg='#cccccc').place(x=30, y=380)
+        quantityInput = ttk.Entry(inputFrame, width=7, font=('Helvetica', 14))
+        quantityInput.place(x=230,y=380)
+        
+        # Get entry box content
+        def getContent():
+            model = modelInput.get()
+            brand = brandOption.get()
+            category = categoryOption.get()
+            length = lengthInput.get()
+            width = widthInput.get()
+            height = heightInput.get()
+            mass = massInput.get()
+            fuelCapacity = fuelCapacityInput.get()
+            fuelConsumption = fuelConsumptionInput.get()
+            engineType = engineTypeInput.get()
+            maximalEfficiency = maximalEfficiencyInput.get()
+            color = colorInput.get()
+            sellingPrice = sellingPriceInput.get()
+            quantity = quantityInput.get()
+            atrribute = [model, brand, category, length, width, height, mass, fuelCapacity, fuelConsumption, engineType, maximalEfficiency, color, sellingPrice, quantity]
+            for i in atrribute:
+                if i == '':
+                    messagebox.showwarning("warning", "Some boxes are not filled!")
+                    return
+        
         # Add button
-        addBtn = HoverButton(inputFrame,text='Add',bg='#238636', fg='#fff', font=('Helvetica', 10, 'bold'), width=10, activebackground='#238636', activeforeground='#fff', relief='flat')
+        addBtn = HoverButton(inputFrame,text='Add',bg='#238636', fg='#fff', font=('Helvetica', 10, 'bold'), width=10, activebackground='#238636', activeforeground='#fff', relief='flat', command=getContent)
         addBtn.place(x=660,y=420)
         
+        # Clear entry box content
+        def clearContent():
+            modelInput.delete(0, tk.END)
+            brandOption.set('')
+            categoryOption.set('')
+            lengthInput.delete(0, tk.END)
+            widthInput.delete(0, tk.END)
+            heightInput.delete(0, tk.END)
+            massInput.delete(0, tk.END)
+            fuelCapacityInput.delete(0, tk.END)
+            fuelConsumptionInput.delete(0, tk.END)
+            engineTypeInput.delete(0, tk.END)
+            maximalEfficiencyInput.delete(0, tk.END)
+            colorInput.delete(0, tk.END)
+            sellingPriceInput.delete(0, tk.END)
+            quantityInput.delete(0, tk.END)
+        
         # Clear button
-        clearBtn = HoverButton(inputFrame,text='Clear',bg='#cc0000', fg='#fff', font=('Helvetica', 10, 'bold'), width=10, activebackground='#cc0000', activeforeground='#fff', relief='flat')
+        clearBtn = HoverButton(inputFrame,text='Clear',bg='#cc0000', fg='#fff', font=('Helvetica', 10, 'bold'), width=10, activebackground='#cc0000', activeforeground='#fff', relief='flat', command=clearContent)
         clearBtn.place(x=770,y=420)
+        
         
         
     def displayManageProducts(self, contentFrame):
@@ -262,7 +329,8 @@ class Main:
         self.clearFrame(contentFrame)
         tk.Label(contentFrame, text="Orders history",font=('Helvetica', 25, 'bold'), bg='#fff').place(x=60, y=60)
     
-        
+
+            
         
 def main():
     root = tk.Tk()
